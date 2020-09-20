@@ -2,27 +2,22 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Button, ScrollView} from 'react-native';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
-import MapView, { Marker } from 'react-native-maps'
 
-
-import TreeList from "../components/treeList";
+import LeaderList from "../components/leaderList";
 import Footer from "../components/footer";
-
+import SegmentedControlTab from "react-native-segmented-control-tab";
 let customFonts  = {
   'FuturaH': require('../assets/fonts/futurah.ttf'),
   'FuturaL': require('../assets/fonts/futural.ttf'),
 };
 
-export default class Trees extends React.Component  {
+export default class Planter extends React.Component  {
   state = {
     fontsLoaded: false,
     playing: false,
     selectedIndex: 0,
-    markers: [{"latlng":{
-        "latitude":47.345208,
-        "longitude": 8.522,
-      },
-    }],
+    score: 20,
+    trees: 2,
 
   };
 
@@ -49,7 +44,7 @@ export default class Trees extends React.Component  {
         headers: {
         'Content-Type': 'application/json',
         },
-        body: JSON.stringify({"action": "location", "lat" : 47.345208, "lon": 8.522, "email":"e@mail.com"})
+        body: JSON.stringify({"action": "location", "lat" : 2.2222, "lon": 45.225, "email":"e@mail.com"})
 })
     .then((response) => response.json())
     .then((responseJson) => {
@@ -66,30 +61,15 @@ console.log(responseJson);
     {
       
     name:"John Doe",
-    album:"https://pbs.twimg.com/media/EaCl5AtVcAA7R20.jpg", 
-    artist:"Forestry Worker, CH",
+    artist:"$45.00",
   },
   {
-    
-    name:"HackZurich",
-    album:"https://m.media-amazon.com/images/I/81CDLsfElHL._SS500_.jpg", 
-    artist:"Agency, CH",
-  },
-  {
-    
-    name:"Jane Doe",
-    album:"https://m.media-amazon.com/images/I/81mowVGtHdL._SS500_.jpg", 
-    artist:"Farmer, CH",
-  },
-  {
-    
-    name:"TeamZero",
-    album:"https://upload.wikimedia.org/wikipedia/en/1/14/Jax_Jones_-_Snacks_%28Supersize%29.png", 
-    artist:"Agency, CH",
+      
+    name:"John Doe",
+    artist:"$30.00",
   },
   ]
   }
- 
 
   render(){
     if (this.state.fontsLoaded) {
@@ -106,40 +86,18 @@ console.log(responseJson);
     }
     {!this.state.playing &&
           <View>
-            <Text style={{position:'relative',fontSize:20,marginTop:'10%',textAlign:'center', color:'#364f6b', fontFamily:'FuturaH'}}>Planted Trees</Text>
-          
-        <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 47.345208, 
-          longitude: 8.522860,
-          latitudeDelta: .00005,
-          longitudeDelta: .00005
-        }} 
-        onLongPress={this.ShowHideComponent}
-        onPress={(e) => this.setState({ markers: [...this.state.markers, { latlng: e.nativeEvent.coordinate}],lat:e.nativeEvent.coordinate.latitude,long:e.nativeEvent.coordinate.longitude })}>
-          {
-              this.state.markers.map((marker, i) => (
-                  <MapView.Marker key={i} coordinate={marker.latlng} >
-                
-                </MapView.Marker>
-                
-                  
-              ))}
-              
-      </MapView>
-    
-     
-            
+            <Text style={{position:'relative',fontSize:20,marginTop:'10%',textAlign:'center', color:'#364f6b', fontFamily:'FuturaH'}}>Trees Planted</Text>
+            <Text style={{position:'relative',fontSize:40,marginTop:'4%',textAlign:'center', color:'#8ab661', fontFamily:'FuturaH', marginLeft:'5%'}}>x{this.state.trees}</Text>
+            <Image source={require('../assets/tree.png')} style={styles.tree}></Image>
           </View>
     }
       </View>
-      <Text style={{position:'relative',fontSize:20,marginTop:'10%',marginLeft:'5%', textAlign:'left', color:'#364f6b', fontFamily:'FuturaH'}}>Plant a tree</Text>
+      <Text style={{position:'relative',fontSize:20,marginTop:'10%',marginLeft:'5%', textAlign:'left', color:'#364f6b', fontFamily:'FuturaH'}}>Requests</Text>
     
       <ScrollView style={styles.scrollcontainer}>
-      <TreeList itemList={this.getData()}/>
+      <LeaderList itemList={this.getData()}/>
       </ScrollView>
-    <View style={{position:'absolute', bottom:'2%', zIndex:5, width:'100%'}}><Footer></Footer></View> 
+    <View style={{position:'absolute', bottom:'5%', zIndex:5, width:'100%'}}><Footer></Footer></View> 
    
 
       
@@ -157,10 +115,11 @@ const styles = StyleSheet.create({
     height:'100%',
     position:'relative',
     backgroundColor:'#f5f5f5',
-    marginTop:'5%'
+    marginTop:'10%'
   },
   scrollcontainer:{
-    marginBottom:'17%'
+    height:'75%',
+    position:'relative',
   },
   left:{
     height:'7%',
@@ -187,10 +146,10 @@ const styles = StyleSheet.create({
     alignSelf:'center',
   },
   tree:{
-    height:'20%',
-    width:'20%',
+    height:'40%',
+    width:'40%',
     marginTop:'-15%',
-    marginLeft:'30%',
+    marginLeft:'20%',
     marginRight:'2%',
     resizeMode:'contain',
     zIndex:4,
@@ -205,13 +164,6 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     borderRadius:10,
   },
-  map:{
-      position:'relative',
-      height:'80%',
-      width:'90%',
-      alignSelf:'center',
-
-  },
   spotify:{
     height:'100%',
     width:'8%',
@@ -223,7 +175,7 @@ const styles = StyleSheet.create({
   },
   playing:{
       width:'70%',
-      height:'40%',
+      height:'20%',
       elevation:1,
       backgroundColor:'#FFF',
       alignSelf:'center',

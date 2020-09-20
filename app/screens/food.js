@@ -7,6 +7,7 @@ import { Camera } from 'expo-camera';
 import { RNS3 } from 'react-native-upload-aws-s3';
 
 import SongList from "../components/songList";
+import RestaurantList from "../components/restraurantList";
 import Footer from "../components/footer";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 let customFonts  = {
@@ -29,7 +30,7 @@ export default class Food extends React.Component  {
     ref: null,
     res:'',
     recommendations:false,
-    restaurant:"Select an eco-friendly restaurant to earn points",
+    restaurant:"Checkin at an eco-friendly restaurant to earn points",
     rest:true,
     cart: false,
     score:20,
@@ -64,8 +65,8 @@ export default class Food extends React.Component  {
     const options = {
       bucket: "carbocount-images",
       region: "us-east-1",
-      accessKey: "AKIA4UFI2RPDEZLDRFMS",
-      secretKey: "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",
+      accessKey: ACCESS_KEY,
+      secretKey: SECRET_KEY,
       successActionStatus: 201
     }
    
@@ -274,7 +275,7 @@ export default class Food extends React.Component  {
     }
      {this.state.rest && this.state.selectedIndex==2 &&
       <ScrollView style={styles.scrollcontainer}>
-      <SongList itemList={this.getData()}/>
+      <RestaurantList itemList={this.getData()}/>
       </ScrollView>
     }
     <View style={{position:'absolute', bottom:'5%', zIndex:5, width:'100%'}}><Footer></Footer></View> 

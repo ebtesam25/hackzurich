@@ -1,16 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import Leader from '../assets/profile.png';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-export default function Tree({ route,name,album, artist}) {
+import Item from '../assets/item.png';
+export default function Restaurant({ route,name,album, artist}) {
     const _showAlert = () => {
         Alert.alert(
-          'Confirm',
-          'Would you like to plant a tree here?',
+          'Checkin',
+          'Confirm checkin? Note: You will earn 10 points',
           [
-            {text: 'Yes', onPress: () => console.log('Tree Planted')},
+            {text: 'Yes', onPress: () => console.log('Checkin')},
             {text: 'Cancel', onPress: () => console.log('Cancelled'), style: 'cancel'},
           ],
           { cancelable: false }
@@ -19,9 +18,9 @@ export default function Tree({ route,name,album, artist}) {
     const navigation = useNavigation();
     return (
     <View style={styles.container}>
-         <Image source={Leader} style={styles.photo} />
+         <Image source={Item} style={styles.photo} />
         <View style={styles.fishdeets}>  
-       <TouchableOpacity onPress={()=>_showAlert()}><Text style={styles.name}>{name}</Text></TouchableOpacity> 
+        <TouchableOpacity onPress={()=>_showAlert()}><Text style={styles.name}>{name}</Text></TouchableOpacity>
        
             <Text style={styles.description}>
                 {artist}
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#000',
         fontFamily:'FuturaH',
-        marginTop: 0,
+        marginTop: '0%',
         textAlignVertical:'center',
     },
      photo: {

@@ -1,15 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Treee from '../assets/tree.png';
+import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
+
+
 export default function Tree({ route,name,album, artist}) {
+    const _showAlert = () => {
+        Alert.alert(
+          'Confirm',
+          'Would you like to request them to plant a tree for you? Note: This will cost you $15.00',
+          [
+            {text: 'Yes, pay with PayPal', onPress: () => console.log('$15.00 sent')},
+            {text: 'Cancel', onPress: () => console.log('Cancelled'), style: 'cancel'},
+          ],
+          { cancelable: false }
+        )
+    }
     const navigation = useNavigation();
     return (
     <View style={styles.container}>
          <Image source={Treee} style={styles.photo} />
         <View style={styles.fishdeets}>  
-        <Text style={styles.name}>{name}</Text>
+<TouchableOpacity><Text style={styles.name} onPress={_showAlert}>{name}</Text></TouchableOpacity>
        
             <Text style={styles.description}>
                 {artist}
@@ -41,10 +55,10 @@ const styles = StyleSheet.create({
         
     },
     name: {
-        fontSize: 20,
+        fontSize: 21,
         color: '#000',
         fontFamily:'FuturaH',
-        marginTop: '-5%',
+        marginTop: '0%',
         textAlignVertical:'center',
     },
      photo: {

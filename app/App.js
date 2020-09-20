@@ -10,6 +10,8 @@ import Reg from './screens/reg';
 import Home from './screens/home';
 import Food from './screens/food';
 import Trees from './screens/trees';
+import HelloWorldSceneAR from './screens/artree';
+import Planter from './screens/planter';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +46,16 @@ function MyStack() {
       <Stack.Screen 
         name="Trees" 
         component={Trees} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Art" 
+        component={HelloWorldSceneAR} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Planter" 
+        component={Planter} 
         options={{ headerShown: false}} 
       />
     </Stack.Navigator>

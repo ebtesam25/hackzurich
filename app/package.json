@@ -33,7 +33,8 @@
     "react-native-segmented-control-tab": "^3.4.1",
     "react-native-unimodules": "~0.10.1",
     "react-native-upload-aws-s3": "^0.8.1",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "react-viro": "^2.17.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
